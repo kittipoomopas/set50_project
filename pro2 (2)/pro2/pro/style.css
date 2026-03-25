@@ -1,0 +1,556 @@
+/* นำเข้าฟอนต์ */
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500&display=swap');
+
+/* ตั้งค่าพื้นฐานให้หน้าเว็บ */
+body {
+    margin: 0;
+    font-family: 'Prompt', sans-serif;
+    background-color: #1a1a20;
+    color: #e4e4e7;
+}
+
+/* --- แถบ Navbar --- */
+.navbar {
+    background-color: #24252b;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    border-bottom: 1px solid #333;
+}
+
+.left-side {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.logo .icon {
+    color: #10b981;
+}
+
+.menu {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+}
+
+.menu li {
+    color: #9ca3af;
+    cursor: pointer;
+    padding-bottom: 5px;
+}
+
+.menu a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.menu li:hover {
+    color: #fff;
+    border-bottom: 2px solid #10b981;
+}
+
+.menu li.active {
+    color: #fff;
+    border-bottom: 2px solid #10b981;
+}
+
+/* --- ฝั่งขวาของ Nav --- */
+.right-side {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.avatar {
+    width: 32px;
+    height: 32px;
+    background-color: #4b5563;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-logout {
+    background-color: #374151;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Prompt', sans-serif;
+}
+
+.btn-logout:hover {
+    background-color: #4b5563;
+}
+
+/* --- โครงสร้างหลัก (Main Layout) --- */
+.main-container {
+    display: flex;
+    gap: 20px;
+    padding: 20px 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.left-col {
+    flex: 7;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.right-col {
+    flex: 5;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* --- สไตล์กล่องพื้นฐาน (Box) --- */
+.box {
+    background-color: #24252b;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.box h3 {
+    margin-top: 0;
+    color: #fff;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.chart-placeholder {
+    height: 300px;
+    background-color: #1a1a20;
+    border: 1px dashed #4b5563;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6b7280;
+}
+
+.placeholder-text {
+    color: #6b7280;
+    font-style: italic;
+}
+
+/* --- กล่องซื้อ-ขาย --- */
+.trade-action-box {
+    display: flex;
+    gap: 15px;
+}
+
+.trade-form {
+    flex: 1;
+    background-color: #1a1a20;
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.trade-form h3 {
+    text-align: center;
+}
+
+.trade-form input {
+    padding: 10px;
+    border-radius: 4px;
+    border: none;
+    outline: none;
+    font-family: 'Prompt', sans-serif;
+}
+
+.balance {
+    font-size: 12px;
+    color: #9ca3af;
+    text-align: left;
+}
+
+.btn-buy, .btn-sell {
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn-buy { background-color: #10b981; }
+.btn-buy:hover { background-color: #059669; }
+
+.btn-sell { background-color: #ef4444; }
+.btn-sell:hover { background-color: #dc2626; }
+
+
+/* =========================================
+   อัปเดตใหม่: กล่องข่าวสารแบบกะทัดรัด (Compact) 
+   ========================================= */
+
+.box-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 15px;
+}
+
+.box-header h3 {
+    margin-bottom: 0;
+}
+
+.view-all {
+    font-size: 13px;
+    color: #10b981;
+    text-decoration: none;
+}
+
+.view-all:hover {
+    text-decoration: underline;
+}
+
+.news-box-compact {
+    max-height: 250px;
+    display: flex;
+    flex-direction: column;
+}
+
+.news-list-compact {
+    overflow-y: auto;
+    padding-right: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* แต่ง Scrollbar (แถบเลื่อน) ของกล่องข่าวให้สวยเข้ากับธีม */
+.news-list-compact::-webkit-scrollbar {
+    width: 6px;
+}
+.news-list-compact::-webkit-scrollbar-track {
+    background: #1a1a20; 
+}
+.news-list-compact::-webkit-scrollbar-thumb {
+    background: #4b5563; 
+    border-radius: 10px;
+}
+
+.news-item {
+    display: flex;
+    gap: 15px;
+    padding: 12px 0;
+    border-bottom: 1px solid #3f3f46;
+    cursor: pointer;
+}
+
+.news-item:last-child {
+    border-bottom: none;
+}
+
+.news-item:hover .news-title {
+    color: #10b981;
+}
+
+.news-time {
+    color: #9ca3af;
+    font-size: 13px;
+    min-width: 40px;
+}
+
+.news-title {
+    margin: 0;
+    font-size: 14px;
+    color: #e4e4e7;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color 0.2s;
+}
+/* home ------------------------------------------*/
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#0f172a;
+    color:white;
+}
+
+/* ===== Navbar ===== */
+.navbar{
+    height:60px;
+    background:#111827;
+    display:flex;
+    align-items:center;
+    padding:0 40px;
+    font-weight:bold;
+}
+
+/* ===== Layout ===== */
+.container{
+    padding:30px 40px;
+}
+
+.top-section{
+    display:flex;
+    gap:25px;
+}
+
+.card{
+    background:#1e293b;
+    border-radius:15px;
+    padding:20px;
+}
+
+.card h2{
+    font-size:18px;
+    margin-bottom:15px;
+    border-left:4px solid #22c55e;
+    padding-left:10px;
+}
+
+/* ===== Chart ===== */
+.chart-card{
+    flex:2;
+    height:400px;
+}
+
+.chart-placeholder{
+    height:300px;
+    background:#0f172a;
+    border-radius:10px;
+}
+
+/* ===== Right Section ===== */
+.right-section{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.small-card{
+    background:#1e293b;
+    border-radius:15px;
+    padding:20px;
+    height:250px;              /* กำหนดความสูงตายตัว */
+    display:flex;
+    flex-direction:column;
+}
+
+.small-card h2{
+    margin-bottom:10px;
+    border-left:4px solid #22c55e;
+    padding-left:10px;
+}
+
+/* ส่วนรายการที่เลื่อน */
+.small-list{
+    overflow-y:auto;
+    flex:1;
+    padding-right:5px;
+}
+
+/* กล่อง item */
+.small-box{
+    height:45px;
+    background:#0f172a;
+    border-radius:8px;
+    margin-bottom:10px;
+}
+
+/* Scrollbar theme */
+.small-list::-webkit-scrollbar{
+    width:6px;
+}
+
+.small-list::-webkit-scrollbar-thumb{
+    background:#334155;
+    border-radius:10px;
+}
+
+/* ===== Table ===== */
+.table-section{
+    margin-top:30px;
+}
+
+.table-card{
+    height:380px;
+}
+
+.table-header{
+    height:50px;
+    background:#0f172a;
+    border-radius:8px;
+    margin-bottom:10px;
+}
+
+.table-row{
+    height:40px;
+    background:#0f172a;
+    border-radius:8px;
+    margin-bottom:8px;
+}
+/* ------------------port----------------------- */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#0f172a;
+    color:white;
+}
+
+/* ===== Navbar ===== */
+.navbar{
+    height:60px;
+    background:#111827;
+}
+
+/* ===== Layout ===== */
+.container{
+    padding:30px 40px;
+}
+
+/* ===== Summary Cards (4 กล่องบน) ===== */
+.summary{
+    display:flex;
+    gap:20px;
+    margin-bottom:30px;
+}
+
+.summary-card{
+    flex:1;
+    background:#1e293b;
+    border-radius:15px;
+    padding:20px;
+    min-height:100px;
+}
+
+.summary-card h3{
+    font-size:14px;
+    margin-bottom:10px;
+    color:#cbd5e1;
+}
+
+.summary-placeholder{
+    height:30px;
+    background:#0f172a;
+    border-radius:8px;
+}
+
+/* ===== Bottom Section ===== */
+.bottom-section{
+    display:flex;
+    gap:25px;
+}
+
+/* ===== Pie Chart Card ===== */
+.pie-card{
+    flex:1;
+    background:#1e293b;
+    border-radius:15px;
+    padding:20px;
+    min-height:400px;
+}
+
+.pie-card h2{
+    margin-bottom:15px;
+    border-left:4px solid #22c55e;
+    padding-left:10px;
+}
+
+.pie-placeholder{
+    height:320px;
+    background:#0f172a;
+    border-radius:10px;
+}
+
+/* ===== Asset List Card ===== */
+.asset-card{
+    flex:1.2;
+    background:#1e293b;
+    border-radius:15px;
+    padding:20px;
+    min-height:400px;
+}
+
+.asset-card h2{
+    margin-bottom:15px;
+    border-left:4px solid #22c55e;
+    padding-left:10px;
+}
+
+/* header columns placeholder */
+.asset-header{
+    height:40px;
+    background:#0f172a;
+    border-radius:8px;
+    margin-bottom:15px;
+}
+
+/* asset item placeholder */
+.asset-item{
+    height:70px;
+    background:#0f172a;
+    border-radius:10px;
+    margin-bottom:15px;
+}
+.asset-card{
+    flex:1.2;
+    background:#1e293b;
+    border-radius:15px;
+    padding:20px;
+    height:400px;              /* กำหนดความสูงตายตัว */
+    display:flex;
+    flex-direction:column;
+}
+
+/* ส่วน list ที่จะเลื่อน */
+.asset-list{
+    margin-top:10px;
+    overflow-y:auto;           /* เปิด scroll แนวตั้ง */
+    flex:1;                    /* กินพื้นที่ที่เหลือ */
+    padding-right:5px;
+}
+
+/* ปรับ scrollbar ให้เข้าธีม */
+.asset-list::-webkit-scrollbar{
+    width:6px;
+}
+
+.asset-list::-webkit-scrollbar-thumb{
+    background:#334155;
+    border-radius:10px;
+}

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>จัดการคำสั่งซื้อขาย - Trading Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* เพิ่ม CSS สไตล์ตารางให้ดูเนียนตาขึ้นนิดหน่อย */
+        .stock-table { width: 100%; border-collapse: collapse; text-align: left; }
+        .stock-table th { padding: 12px 10px; border-bottom: 1px solid #4b5563; color: #9ca3af; font-weight: normal; }
+        .stock-table td { padding: 12px 10px; border-bottom: 1px solid #3f3f46; color: #e4e4e7; }
+        .text-gain { color: #10b981; } /* สีเขียว */
+        .text-loss { color: #ef4444; } /* สีแดง */
+        .text-bold { font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="left-side">
+            <div class="logo">
+                <span class="icon">📊</span> LOGO
+            </div>
+            <ul class="menu">
+                <li><a href="overview.html">ภาพรวมการลงทุน</a></li>
+                <li class="active"><a href="trade.html">จัดการคำสั่งซื้อขาย</a></li>
+                <li><a href="portfolio.html">พอร์ตจำลองของฉัน</a></li>
+                <li><a href="news.html">ข่าวสาร</a></li>
+            </ul>
+        </div>
+        <div class="right-side">
+            <div class="user">
+                <div class="avatar">👤</div>
+                <span>bughumnoi</span>
+            </div>
+            <button class="btn-logout">ออกจากระบบ</button>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        
+        <div class="left-col">
+            
+            <div class="box">
+                <h3>กราฟราคา | SET50</h3> 
+                <div class="chart-container" style="height: 400px; width: 100%;">
+                    <div class="tradingview-widget-container" style="height: 100%; width: 100%;">
+                      <div id="tradingview_chart" style="height: calc(100% - 32px); width: 100%;"></div>
+                      <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+                      <script type="text/javascript">
+                      new TradingView.widget({
+                          "autosize": true,
+                          "symbol": "SET:SET50",
+                          "interval": "D",
+                          "timezone": "Asia/Bangkok",
+                          "theme": "dark",
+                          "style": "1",
+                          "locale": "th_TH",
+                          "enable_publishing": false,
+                          "backgroundColor": "#24252b",
+                          "gridColor": "#3f3f46",
+                          "hide_top_toolbar": false,
+                          "hide_legend": false,
+                          "save_image": false,
+                          "container_id": "tradingview_chart"
+                      });
+                      </script>
+                    </div>
+                    </div>
+            </div>
+
+            <div class="box">
+                <h3>ราคาหุ้น (ดึงสดจาก Python)</h3>
+                <table class="stock-table">
+                    <thead>
+                        <tr>
+                            <th>หุ้น</th>
+                            <th>ราคาล่าสุด</th>
+                            <th>% เปลี่ยนแปลง</th>
+                        </tr>
+                    </thead>
+                    <tbody id="stock-table-body">
+                        <tr><td colspan="3" style="text-align:center; padding: 20px;">⏳ กำลังโหลดข้อมูล... (อย่าลืมรัน Python API)</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <div class="right-col">
+            <div class="box trade-action-box">
+                <div class="trade-form">
+                    <h3>ซื้อ</h3>
+                    <input type="text" placeholder="กรอกชื่อหุ้น">
+                    <input type="number" placeholder="จำนวนหุ้น">
+                    <p class="balance">ยอดเงินคงเหลือ 100,000 บาท</p>
+                    <button class="btn-buy">Buy</button>
+                </div>
+                <div class="trade-form">
+                    <h3>ขาย</h3>
+                    <input type="text" placeholder="กรอกชื่อหุ้น">
+                    <input type="number" placeholder="จำนวนหุ้น">
+                    <p class="balance">ยอดเงินคงเหลือ 100,000 บาท</p>
+                    <button class="btn-sell">Sell</button>
+                </div>
+            </div>
+
+            <div class="box news-box-compact">
+                <div class="box-header">
+                    <h3>ข่าวสารอัปเดต</h3>
+                    <a href="news.html" class="view-all">ดูทั้งหมด &rarr;</a>
+                </div>
+                <div class="news-list-compact">
+                    <div class="news-item">
+                        <span class="news-time">10:30</span>
+                        <p class="news-title">หุ้นไทยเปิดบวก 2.60 จุด ตลาดไร้ปัจจัยใหม่...</p>
+                    </div>
+                    <div class="news-item">
+                        <span class="news-time">09:15</span>
+                        <p class="news-title">ราคาทองคำผันผวนหนัก นักลงทุนเทขายทำกำไร...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function fetchStockData() {
+            try {
+                // ดึงข้อมูลจาก Flask API (ต้องรัน app.py ทิ้งไว้)
+                const response = await fetch('http://127.0.0.1:5000/api/stocks');
+                const stocks = await response.json();
+                
+                const tableBody = document.getElementById('stock-table-body');
+                tableBody.innerHTML = ''; // ล้างข้อความกำลังโหลด
+
+                stocks.forEach(stock => {
+                    // จัดการสีและเครื่องหมาย
+                    const colorClass = stock.change >= 0 ? 'text-gain' : 'text-loss';
+                    const sign = stock.change > 0 ? '+' : '';
+
+                    // สร้าง HTML ทีละแถว
+                    const row = `
+                        <tr>
+                            <td class="text-bold">${stock.symbol}</td>
+                            <td>${stock.price.toFixed(2)}</td>
+                            <td class="${colorClass}">${sign}${stock.change.toFixed(2)}%</td>
+                        </tr>
+                    `;
+                    tableBody.innerHTML += row;
+                });
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('stock-table-body').innerHTML = 
+                    '<tr><td colspan="3" class="text-loss" style="text-align:center;">❌ เชื่อมต่อ Python API ไม่สำเร็จ</td></tr>';
+            }
+        }
+
+        // โหลดข้อมูลทันที และตั้งเวลาโหลดซ้ำทุก 1 นาที
+        fetchStockData();
+        setInterval(fetchStockData, 60000);
+    </script>
+</body>
+</html>

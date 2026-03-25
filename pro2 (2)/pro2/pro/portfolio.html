@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="left-side">
+            <div class="logo">
+                <span class="icon">📊</span> LOGO
+            </div>
+            
+            <ul class="menu">
+                <li><a href="overview.html">ภาพรวมการลงทุน</a></li>
+                <li><a href="trade.html">จัดการคำสั่งซื้อขาย</a></li>
+                <li class="active"><a href="portfolio.html">พอร์ตจำลองของฉัน</a></li>
+                <li><a href="news.html">ข่าวสาร</a></li>
+            </ul>
+        </div>
+
+        <div class="right-side">
+            <div class="user">
+                <div class="avatar">👤</div>
+                <span>bughumnoi</span>
+            </div>
+            <button class="btn-logout">ออกจากระบบ</button>
+        </div>
+    </nav>
+    <div class="navbar"></div>
+
+<div class="container">
+
+    <!-- ===== 4 Summary Boxes ===== -->
+    <div class="summary">
+        <div class="summary-card">
+            <h3>มูลค่าสินทรัพย์รวม</h3>
+            <div class="summary-placeholder"></div>
+        </div>
+
+        <div class="summary-card">
+            <h3>เงินสดคงเหลือ</h3>
+            <div class="summary-placeholder"></div>
+        </div>
+
+        <div class="summary-card">
+            <h3>มูลค่าหุ้นรวม</h3>
+            <div class="summary-placeholder"></div>
+        </div>
+
+        <div class="summary-card">
+            <h3>กำไร/ขาดทุนรวม</h3>
+            <div class="summary-placeholder"></div>
+        </div>
+    </div>
+
+    <!-- ===== Bottom Section ===== -->
+    <div class="bottom-section">
+
+        <!-- Pie Chart -->
+        <div class="pie-card">
+            <h2>สัดส่วนการลงทุน</h2>
+            <div class="pie-placeholder"></div>
+        </div>
+
+        <!-- Asset List -->
+        <div class="asset-card">
+            <h2>รายการสินทรัพย์</h2>
+            <div class="asset-header"></div>
+
+            <div class="asset-list">
+                <div class="asset-item"></div>
+                <div class="asset-item"></div>
+                <div class="asset-item"></div>
+                <div class="asset-item"></div>
+                <div class="asset-item"></div>
+                <div class="asset-item"></div>
+                <div class="asset-item"></div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</body>
+</html>
